@@ -764,7 +764,7 @@ button:disabled {
 /* Dark mode overrides */
 .dark .message-bubble {
     background: linear-gradient(135deg, #374151, #4b5563);
-    @apply text-white;
+    color: white;
 }
 
 .dark .message-bubble-self {
