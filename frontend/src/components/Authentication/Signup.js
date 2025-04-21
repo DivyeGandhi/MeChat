@@ -44,7 +44,13 @@ const SignUp = () => {
 
       localStorage.setItem('userInfo', JSON.stringify(data));
       toast.success('Signup successful!');
-      history.push('/chats');
+      
+      // Small delay to ensure state is updated
+      setTimeout(() => {
+        history.push('/chats');
+        // Force a reload after navigation
+        window.location.reload();
+      }, 100);
     } catch (error) {
       console.error('Signup error:', error);
       
