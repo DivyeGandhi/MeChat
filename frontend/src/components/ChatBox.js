@@ -385,6 +385,9 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                 // First get the socket connection
                 const socket = await getSocket();
                 if (!socket || !socket.connected) {
+                    console.warn('Socket not connected, attempting to reconnect...');
+                    // Try to reconnect
+                    await connectSocket(user);
                     throw new Error('Not connected to chat server');
                 }
 
@@ -397,7 +400,7 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
 
                 // Send the message to the server
                 const { data } = await axios.post(
-                    "/api/message",
+                    `${process.env.REACT_APP_BACKEND_URL}/api/message`,
                     {
                         content: content.trim(),
                         chatId: selectedChat._id,
