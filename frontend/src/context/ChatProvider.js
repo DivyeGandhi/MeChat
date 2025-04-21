@@ -24,7 +24,7 @@ const ChatProvider = ({ children }) => {
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(false);
     const [unreadMessages, setUnreadMessages] = useState({});
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const fetchChats = async () => {
         if (!user?.token) return;
@@ -117,17 +117,17 @@ const ChatProvider = ({ children }) => {
     useEffect(() => {
         if (user) {
             if (window.location.pathname === '/') {
-                history("/chats");
+                navigate("/chats");
             }
         } else {
             setChats([]);
             setSelectedChat(null);
             setUnreadMessages({});
             if (window.location.pathname !== '/') {
-                history("/");
+                navigate("/");
             }
         }
-    }, [user, history]);
+    }, [user, navigate]);
 
     // Separate useEffect for fetching chats
     useEffect(() => {
