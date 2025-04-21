@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { FaUser, FaUserPlus } from "react-icons/fa"
 import Login from "../components/Authentication/Login"
 import Signup from '../components/Authentication/Signup'
 import { useHistory } from 'react-router-dom';
@@ -46,7 +45,7 @@ const HomePage = () => {
                   activeTab === 'login' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
                 }`}
               >
-                <FaUser className="mr-2" />
+                <span className="mr-2">👤</span>
                 Login
               </button>
 
@@ -56,7 +55,7 @@ const HomePage = () => {
                   activeTab === 'signup' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
                 }`}
               >
-                <FaUserPlus className="mr-2" />
+                <span className="mr-2">➕</span>
                 Signup
               </button>
             </div>
