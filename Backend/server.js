@@ -15,7 +15,7 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://mechat-5zp1.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -63,7 +63,7 @@ const io = require('socket.io')(server, {
     pingTimeout: 60000,
     pingInterval: 30000,
     cors: {
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:3000', 'https://mechat-5zp1.onrender.com'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     },
