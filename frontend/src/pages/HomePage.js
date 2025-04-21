@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { LuSquareCheck, LuUser } from "react-icons/lu"
+import { LuSquareCheck, LuUser } from "react-icons/lucide"
 import Login from "../components/Authentication/Login"
 import Signup from '../components/Authentication/Signup'
 import { useHistory } from 'react-router-dom';
