@@ -30,7 +30,7 @@ export const connectSocket = async (user) => {
             }
 
             console.log('Creating new socket connection');
-            const socketUrl = "https://mechat-5zp1.onrender.com";
+            const socketUrl = process.env.REACT_APP_SOCKET_URL || 'https://mechat-5zp1.onrender.com';
             console.log('Connecting to socket URL:', socketUrl);
             
             socket = io(socketUrl, {
