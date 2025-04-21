@@ -9,6 +9,8 @@ import { connectSocket, getSocket, joinChat, leaveChat } from '../config/socket'
 
 const ENDPOINT = "https://mechat-5zp1.onrender.com/";
 const socketUrl = process.env.REACT_APP_SOCKET_URL || 'https://mechat-5zp1.onrender.com';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const API_URL = isDevelopment ? '' : process.env.REACT_APP_BACKEND_URL;
 
 const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { theme } = useTheme();
@@ -383,25 +385,17 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
 
         const sendMessageWithRetry = async (content, retries = 0) => {
             try {
-                // First get the socket connection
-                const socket = await getSocket();
-                if (!socket || !socket.connected) {
-                    console.warn('Socket not connected, attempting to reconnect...');
-                    // Try to reconnect
-                    await connectSocket(user);
-                    throw new Error('Not connected to chat server');
-                }
-
                 const config = {
                     headers: {
                         "Content-type": "application/json",
                         Authorization: `Bearer ${user.token}`,
                     },
+                    withCredentials: true
                 };
 
                 // Send the message to the server
                 const { data } = await axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/api/message`,
+                    `${API_URL}/api/message`,
                     {
                         content: content.trim(),
                         chatId: selectedChat._id,
@@ -409,14 +403,22 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                     config
                 );
 
-                // Emit the message through socket
-                socket.emit('new message', data);
+                // Get socket connection after HTTP request succeeds
+                const socket = await getSocket();
+                if (socket && socket.connected) {
+                    socket.emit('new message', data);
+                }
                 
                 // Update local state
                 setMessages(prev => [...prev, data]);
                 
                 // Clear typing indicator
-                socket.emit('stop typing', selectedChat._id);
+                if (socket && socket.connected) {
+                    socket.emit('stop typing', { 
+                        chatId: selectedChat._id,
+                        userId: user._id 
+                    });
+                }
                 setTyping(false);
                 
                 // Reset retry count on success
@@ -450,7 +452,7 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
             // If message failed to send, keep it in the input field
             setMessage(messageContent);
         }
-    }, [selectedChat, user?.token]);
+    }, [selectedChat, user?.token, user?._id]);
 
     // Update the handleSendMessage function
     const handleSendMessage = async (e) => {
@@ -619,12 +621,17 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                                         <div
                                             className={`max-w-[70%] rounded-lg p-3 ${
                                                 message.sender._id === user._id
-                                                    ? 'bg-blue-500 text-white'
-                                                    : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white'
-                                            }`}
+                                                    ? 'bg-[#2196F3] text-white'  // Keep your messages blue
+                                                    : 'bg-[#4CAF50] text-white'  // Green background for other messages
+                                            } shadow-sm`}
                                         >
-                                            <p>{message.content}</p>
-                                            <span className="text-xs opacity-70 mt-1 block">
+                                            {selectedChat.isGroupChat && message.sender._id !== user._id && (
+                                                <p className="text-sm font-semibold text-white mb-1">
+                                                    {message.sender.name}
+                                                </p>
+                                            )}
+                                            <p className="text-white">{message.content}</p>
+                                            <span className="text-xs text-white/70 mt-1 block">
                                                 {new Date(message.createdAt).toLocaleTimeString([], {
                                                     hour: '2-digit',
                                                     minute: '2-digit',
@@ -805,7 +812,7 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             )}
         </div>
     );

@@ -3,6 +3,9 @@ import io from 'socket.io-client';
 let socket = null;
 let connectionPromise = null;
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+const SOCKET_URL = isDevelopment ? 'http://localhost:7000' : process.env.REACT_APP_SOCKET_URL || 'https://mechat-5zp1.onrender.com';
+
 export const connectSocket = async (user) => {
     if (!user) {
         console.error('No user provided for socket connection');
@@ -29,11 +32,9 @@ export const connectSocket = async (user) => {
                 socket = null;
             }
 
-            console.log('Creating new socket connection');
-            const socketUrl = process.env.REACT_APP_SOCKET_URL || 'https://mechat-5zp1.onrender.com';
-            console.log('Connecting to socket URL:', socketUrl);
+            console.log('Creating new socket connection to:', SOCKET_URL);
             
-            socket = io(socketUrl, {
+            socket = io(SOCKET_URL, {
                 query: {
                     userId: user._id,
                 },
@@ -44,7 +45,8 @@ export const connectSocket = async (user) => {
                 reconnectionAttempts: Infinity,
                 timeout: 20000,
                 forceNew: true,
-                autoConnect: true
+                autoConnect: true,
+                withCredentials: true
             });
 
             // Connection success handler
