@@ -617,7 +617,14 @@ button:disabled {
 
 /* Avatar styling with colorful gradients */
 .avatar {
-    @apply w-10 h-10 rounded-full flex items-center justify-center font-semibold text-lg;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.125rem;
     color: black;
     text-shadow: none;
     transition: all 0.3s ease;
@@ -823,7 +830,11 @@ button:disabled {
 
 /* Chat items in MyChats.js */
 .chat-list-item {
-    @apply p-3 cursor-pointer transition-all duration-200;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
     background-color: #f8fafc;
 }
 
