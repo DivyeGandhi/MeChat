@@ -542,24 +542,24 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                         {/* Back Button - Only visible on mobile */}
                         <button 
                             onClick={() => setSelectedChat(null)}
-                            className="md:hidden mr-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                            className="md:hidden mr-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
                             <svg 
                                 className="w-6 h-6 text-gray-600 dark:text-gray-300" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                    >
-                        <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    strokeWidth={2} 
                                     d="M15 19l-7-7 7-7" 
-                        />
-                    </svg>
+                                />
+                            </svg>
                         </button>
 
-            {/* Chat Header */}
+                        {/* Chat Header */}
                         <div className="flex items-center flex-1">
                             <div 
                                 className="avatar mr-3 cursor-pointer"
@@ -576,29 +576,29 @@ const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) =
                                 }}
                             >
                                 <span>
-                            {selectedChat.isGroupChat 
+                                    {selectedChat.isGroupChat 
                                         ? selectedChat.chatName.charAt(0).toUpperCase()
                                         : selectedChat.users.find(
                                             (u) => u._id !== user._id
                                         )?.name.charAt(0).toUpperCase()}
-                        </span>
-                </div>
-                <div>
+                                </span>
+                            </div>
+                            <div>
                                 <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-                        {selectedChat.isGroupChat 
-                            ? selectedChat.chatName
+                                    {selectedChat.isGroupChat 
+                                        ? selectedChat.chatName
                                         : selectedChat.users.find(
                                             (u) => u._id !== user._id
                                         )?.name}
-                    </h2>
-                    {selectedChat.isGroupChat && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {selectedChat.users.length} members
-                        </p>
-                    )}
-                </div>
-                </div>
-            </div>
+                                </h2>
+                                {selectedChat.isGroupChat && (
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        {selectedChat.users.length} members
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Messages Container */}
                     <div 

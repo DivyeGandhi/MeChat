@@ -2,7 +2,7 @@
 
 .App {
   min-height: 100vh;
-  background-image: url("./Images/IMG.jpg");
+  background-color: var(--background);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

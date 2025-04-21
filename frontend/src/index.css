@@ -5,7 +5,7 @@
 /* Light theme variables */
 :root {
   /* Primary colors */
-  --background: #ffffff;
+  --background: #F8EDF1;
   --foreground: #1a1b1e;
   
   /* Surface colors */
@@ -471,8 +471,9 @@ button:disabled {
 }
 
 @layer base {
-  html {
-    background-color: var(--background);
+  html, body, #root {
+    background-color: var(--background) !important;
+    min-height: 100vh;
   }
 
   body {
@@ -482,9 +483,7 @@ button:disabled {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--background);
     color: var(--text-primary);
-    min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -592,14 +591,6 @@ button:disabled {
   * {
     color: inherit;
   }
-  }
-
-  /* Ensure content is above the background */
-  #root {
-    position: relative;
-    z-index: 1;
-  min-height: 100vh;
-  background-color: var(--background);
 }
 
 /* Status indicators */

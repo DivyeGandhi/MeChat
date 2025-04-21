@@ -110,7 +110,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-2 py-1 bg-gray-100 text-gray-600 hover:!bg-gray-300 rounded focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs px-2 py-1 bg-gray-100 text-gray-600 hover:!bg-gray-300 rounded focus:outline-none transition-colors"
                 disabled={isLoading}
               >
                 {showPassword ? 'Hide' : 'Show'}

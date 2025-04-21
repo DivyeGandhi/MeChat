@@ -1,0 +1,279 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Page layout
+\geometry{a4paper, margin=1in}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{MeChat Documentation}
+\lhead{\thepage}
+
+% Custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Code listing style
+\lstset{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+% Title formatting
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries MeChat Documentation\par}
+    \vspace{1cm}
+    {\Large A Real-time Chat Application\par}
+    \vspace{2cm}
+    {\Large\itshape Divye Gandhi\par}
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+MeChat is a real-time chat application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) and Socket.IO for real-time communication. This documentation provides a comprehensive guide to understanding, setting up, and using the MeChat application.
+
+\section{Features}
+\begin{itemize}
+    \item Real-time messaging using Socket.IO
+    \item User authentication and authorization
+    \item One-on-one and group chat support
+    \item Typing indicators
+    \item Message read receipts
+    \item Dark/Light theme support
+    \item Responsive design
+    \item File sharing capabilities
+\end{itemize}
+
+\section{Technical Stack}
+\subsection{Frontend}
+\begin{itemize}
+    \item React.js
+    \item Socket.IO Client
+    \item React Router
+    \item Context API for state management
+    \item Tailwind CSS for styling
+    \item Axios for API calls
+\end{itemize}
+
+\subsection{Backend}
+\begin{itemize}
+    \item Node.js with Express.js
+    \item MongoDB with Mongoose
+    \item Socket.IO Server
+    \item JWT for authentication
+    \item Bcrypt for password hashing
+\end{itemize}
+
+\section{Project Structure}
+\subsection{Frontend Structure}
+\begin{lstlisting}
+frontend/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── ChatBox.js
+│   │   ├── MyChats.js
+│   │   └── SideDrawer.js
+│   ├── context/
+│   │   └── ChatProvider.js
+│   ├── config/
+│   │   └── socket.js
+│   └── pages/
+│       └── ChatPage.js
+└── package.json
+\end{lstlisting}
+
+\subsection{Backend Structure}
+\begin{lstlisting}
+Backend/
+├── config/
+│   └── db.js
+├── controllers/
+│   ├── userController.js
+│   ├── chatController.js
+│   └── messageController.js
+├── models/
+│   ├── userModel.js
+│   ├── chatModel.js
+│   └── messageModel.js
+├── routes/
+│   ├── userRoutes.js
+│   ├── chatRoutes.js
+│   └── messageRoutes.js
+└── server.js
+\end{lstlisting}
+
+\section{Setup and Installation}
+\subsection{Prerequisites}
+\begin{itemize}
+    \item Node.js (v14 or higher)
+    \item MongoDB
+    \item Git
+\end{itemize}
+
+\subsection{Installation Steps}
+\begin{enumerate}
+    \item Clone the repository:
+    \begin{lstlisting}[language=bash]
+    git clone https://github.com/DivyeGandhi/MeChat.git
+    cd MeChat
+    \end{lstlisting}
+    
+    \item Install backend dependencies:
+    \begin{lstlisting}[language=bash]
+    npm install
+    \end{lstlisting}
+    
+    \item Install frontend dependencies:
+    \begin{lstlisting}[language=bash]
+    cd frontend
+    npm install
+    \end{lstlisting}
+    
+    \item Create .env files:
+    \begin{itemize}
+        \item Backend (.env):
+        \begin{lstlisting}
+        PORT=7000
+        MONGODB_URI=your_mongodb_uri
+        JWT_SECRET=your_jwt_secret
+        \end{lstlisting}
+        
+        \item Frontend (.env):
+        \begin{lstlisting}
+        REACT_APP_BACKEND_URL=http://localhost:7000
+        REACT_APP_SOCKET_URL=http://localhost:7000
+        \end{lstlisting}
+    \end{itemize}
+    
+    \item Start the development servers:
+    \begin{lstlisting}[language=bash]
+    # Terminal 1 (Backend)
+    npm start
+    
+    # Terminal 2 (Frontend)
+    cd frontend
+    npm start
+    \end{lstlisting}
+\end{enumerate}
+
+\section{API Documentation}
+\subsection{Authentication}
+\begin{itemize}
+    \item POST /api/user/register - Register a new user
+    \item POST /api/user/login - Login user
+    \item GET /api/user - Get user profile
+\end{itemize}
+
+\subsection{Chat}
+\begin{itemize}
+    \item POST /api/chat - Create a new chat
+    \item GET /api/chat - Get all chats
+    \item GET /api/chat/:id - Get chat by ID
+    \item PUT /api/chat/group - Update group chat
+    \item PUT /api/chat/rename - Rename group chat
+\end{itemize}
+
+\subsection{Messages}
+\begin{itemize}
+    \item POST /api/message - Send a message
+    \item GET /api/message/:chatId - Get messages for a chat
+\end{itemize}
+
+\section{Socket.IO Events}
+\subsection{Client Events}
+\begin{itemize}
+    \item setup - Initialize socket connection
+    \item join chat - Join a chat room
+    \item new message - Send a new message
+    \item typing - User is typing
+    \item stop typing - User stopped typing
+\end{itemize}
+
+\subsection{Server Events}
+\begin{itemize}
+    \item connected - Socket connection established
+    \item message received - New message received
+    \item typing - User is typing
+    \item stop typing - User stopped typing
+\end{itemize}
+
+\section{Deployment}
+\subsection{Backend Deployment}
+\begin{enumerate}
+    \item Set up MongoDB Atlas
+    \item Configure environment variables
+    \item Deploy to Render/Heroku
+\end{enumerate}
+
+\subsection{Frontend Deployment}
+\begin{enumerate}
+    \item Update environment variables
+    \item Build the application
+    \item Deploy to Render/Netlify
+\end{enumerate}
+
+\section{Troubleshooting}
+\subsection{Common Issues}
+\begin{itemize}
+    \item Socket connection issues
+    \item Authentication problems
+    \item Message delivery failures
+\end{itemize}
+
+\subsection{Solutions}
+\begin{itemize}
+    \item Check network connectivity
+    \item Verify environment variables
+    \item Clear browser cache
+    \item Check server logs
+\end{itemize}
+
+\section{Contributing}
+\begin{enumerate}
+    \item Fork the repository
+    \item Create a feature branch
+    \item Commit your changes
+    \item Push to the branch
+    \item Create a Pull Request
+\end{enumerate}
+
+\section{License}
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+\end{document} 
