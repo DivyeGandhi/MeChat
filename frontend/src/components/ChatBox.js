@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { connectSocket, getSocket, joinChat, leaveChat } from '../config/socket';
 
+const ENDPOINT = "https://mechat-5zp1.onrender.com/";
+const socketUrl = process.env.REACT_APP_SOCKET_URL || 'https://mechat-5zp1.onrender.com';
+
 const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { theme } = useTheme();
     const [message, setMessage] = useState('');
