@@ -90,7 +90,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-primary"
               disabled={isLoading}
             />
           </div>
@@ -104,13 +104,13 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 pr-12 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-primary"
                 disabled={isLoading}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="password-toggle"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-xs px-2 py-1 bg-gray-100 text-gray-600 hover:!bg-gray-300 rounded focus:outline-none"
                 disabled={isLoading}
               >
                 {showPassword ? 'Hide' : 'Show'}
@@ -121,7 +121,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className={`mt-4 w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+          className={`mt-4 w-full px-4 py-2 bg-purple-primary text-white rounded-md hover:!bg-purple-hover focus:outline-none focus:ring-2 focus:ring-purple-primary ${
             isLoading ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={isLoading}

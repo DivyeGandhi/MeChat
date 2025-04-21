@@ -42,7 +42,9 @@ const HomePage = () => {
               <button
                 onClick={() => setActiveTab('login')}
                 className={`px-4 py-2 rounded-xl text-sm md:text-base flex items-center tab-title ${
-                  activeTab === 'login' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
+                  activeTab === 'login' 
+                    ? 'bg-purple-primary text-white font-bold hover:!bg-purple-hover' 
+                    : 'bg-transparent text-gray-600 hover:!bg-purple-hover/10'
                 }`}
               >
                 <span className="mr-2">👤</span>
@@ -52,7 +54,9 @@ const HomePage = () => {
               <button
                 onClick={() => setActiveTab('signup')}
                 className={`px-4 py-2 rounded-xl text-sm md:text-base flex items-center tab-title ${
-                  activeTab === 'signup' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
+                  activeTab === 'signup' 
+                    ? 'bg-purple-primary text-white font-bold hover:!bg-purple-hover' 
+                    : 'bg-transparent text-gray-600 hover:!bg-purple-hover/10'
                 }`}
               >
                 <span className="mr-2">➕</span>
