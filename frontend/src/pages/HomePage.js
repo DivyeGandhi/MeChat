@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { LuSquareCheck, LuUser } from "react-icons/lucide"
+import { FaUser, FaUserPlus } from "react-icons/fa"
 import Login from "../components/Authentication/Login"
 import Signup from '../components/Authentication/Signup'
 import { useHistory } from 'react-router-dom';
@@ -46,7 +46,7 @@ const HomePage = () => {
                   activeTab === 'login' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
                 }`}
               >
-                <LuUser className="mr-2" />
+                <FaUser className="mr-2" />
                 Login
               </button>
 
@@ -56,7 +56,7 @@ const HomePage = () => {
                   activeTab === 'signup' ? 'bg-white/80 text-black font-bold' : 'text-[var(--foreground)]'
                 }`}
               >
-                <LuSquareCheck className="mr-2" />
+                <FaUserPlus className="mr-2" />
                 Signup
               </button>
             </div>
