@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const ConnectDB = require('./config/db');
 const userRoutes = require('./Routes/userRoutes');
 const chatRoutes = require('./Routes/chatRoutes');
 const messageRoutes = require('./Routes/messageRoutes');
@@ -9,7 +9,7 @@ const cors = require('cors');
 const Chat = require('./Models/chatModel');
 const path = require('path');
 dotenv.config();
-connectDB();
+ConnectDB();
 
 const app = express();
 
