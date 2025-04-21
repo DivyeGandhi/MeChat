@@ -7,8 +7,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { connectSocket, getSocket, joinChat, leaveChat } from '../config/socket';
 
-const ENDPOINT = "http://localhost:7000";
-
 const ChatBox = ({ fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { theme } = useTheme();
     const [message, setMessage] = useState('');

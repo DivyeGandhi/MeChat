@@ -1,14 +1,13 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
-
-const ENDPOINT = "http://localhost:5000";
-let socket;
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChatContext = createContext();
 
-const ChatProvider = ({children}) => {
+const ChatProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
         const userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
@@ -25,7 +24,7 @@ const ChatProvider = ({children}) => {
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(false);
     const [unreadMessages, setUnreadMessages] = useState({});
-    const history = useHistory();
+    const history = useNavigate();
 
     const fetchChats = async () => {
         if (!user?.token) return;
@@ -83,7 +82,7 @@ const ChatProvider = ({children}) => {
     useEffect(() => {
         if (!user) return;
 
-        socket = io(ENDPOINT);
+        const socket = io();
         socket.emit("setup", user);
         socket.on("connected", () => {
             console.log("Socket connected");
@@ -118,14 +117,14 @@ const ChatProvider = ({children}) => {
     useEffect(() => {
         if (user) {
             if (window.location.pathname === '/') {
-                history.push("/chats");
+                history("/chats");
             }
         } else {
             setChats([]);
             setSelectedChat(null);
             setUnreadMessages({});
             if (window.location.pathname !== '/') {
-                history.push("/");
+                history("/");
             }
         }
     }, [user, history]);
