@@ -734,17 +734,15 @@ button:disabled {
     color: black;
 }
 
-/* Keep dark mode styles unchanged */
-.dark .message-bubble,
-.dark .message-bubble-self,
-.dark .message-bubble-other {
-    color: white;
+/* Dark mode message bubble styles */
+.dark .message-bubble {
+  background: linear-gradient(135deg, #374151, #4b5563);
+  color: white;
 }
 
-.dark .message-bubble *,
-.dark .message-bubble-self *,
-.dark .message-bubble-other * {
-    color: white;
+.dark .message-bubble-self {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
 }
 
 /* Dark mode overrides */
@@ -754,7 +752,7 @@ button:disabled {
 }
 
 .dark .message-bubble-self {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
 }
 
 .dark .message-bubble-other[data-first-letter="h"] {
