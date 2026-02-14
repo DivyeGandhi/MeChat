@@ -1,7 +1,7 @@
 # MeChat - Real-time Chat Application
 
 A full-stack real-time chat application built with MERN stack (MongoDB, Express.js, React.js, Node.js) and Socket.io for real-time communication.
-
+Live at: https://mechat-5zp1.onrender.com/chats
 ## Features
 
 - Real-time messaging
